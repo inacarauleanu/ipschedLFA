@@ -29,6 +29,7 @@ network Network
         int w_HP;
         int w_MP;
         int w_LP;
+        double totalDelayHP;
    submodules:
 scheduler: Scheduler {
     gateSize = 3;
@@ -43,6 +44,7 @@ sources[nrHP + nrMP + nrLP]: Source {
 }
 hpq: MyQ{
     NrInputs = nrHP;
+    
 }
 mpq: MyQ{
 	NrInputs = nrMP;

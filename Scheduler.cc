@@ -69,17 +69,23 @@ void Scheduler::handleMessage(cMessage *msg)
                 int mp_cont = mp_length * mp_weigth;
                 int lp_cont = lp_length * lp_weigth;
 
+                int nrHP = network->par("nrHP");
+
                 EV<<"pachete high prio: "<<hp_packs<<endl;
-                if(hp_packs == 5) finish();
+
 
                 int win = std::max(hp_cont, std::max(mp_cont, lp_cont));
 
                 if((!hpq->queue.isEmpty()) && (win == hp_cont) )
                 {
+
                     send(cmd, "txScheduling", 0);
-                    simtime_t delay = simTime() - cmd->getCreationTime();
-                    updateHighPriorityDelay(delay);
                     hp_packs++;
+                    network->par("nrHP").setIntValue(hp_packs);
+                    double time = cmd->getCreationTime().dbl();
+                    EV<<"cmd->getCreationTime().dbl()"<<cmd->getCreationTime().dbl()<<endl; //deci aici trb sa iei timpul la care o sa se trimit
+                    network->par("totalDelayHP").setDoubleValue(time);
+                   // nrHP.setLongValue(hp_packs);
 
 
                 }else if((!mpq->queue.isEmpty()) && (win == mp_cont))

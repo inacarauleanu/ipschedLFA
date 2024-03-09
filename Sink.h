@@ -30,6 +30,8 @@ private:
   protected:
     virtual void initialize();
     virtual void handleMessage(cMessage *msg);
+  public:
+    simtime_t totalDelayHP;
 };
 
 #endif

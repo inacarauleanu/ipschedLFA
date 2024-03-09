@@ -14,6 +14,7 @@
 // 
 
 #include "Sink.h"
+#include "Scheduler.h"
 
 Define_Module(Sink);
 
@@ -24,7 +25,25 @@ void Sink::initialize()
 
 void Sink::handleMessage(cMessage *msg)
 {
-    simtime_t lifetime = simTime() - msg->getCreationTime();
+   // int hp_packs = network->par("nrHP");
+    simtime_t lifetime1 = simTime(); //nu e ok
+    if (msg->arrivedOn("rxPackets",0)) {
+        EV<<"SUNT AICI"<<endl;
+        cModule *network = getParentModule();
+        int nrHP = network->par("nrHP");
+            EV<<"packs PRIO:"<<nrHP<<endl;
+            double total = 0;
+            double totalDelayHP = network->par("totalDelayHP"); //aici acelasi timp pe care l-am luat din scheduler.
+            EV<<"totalDelayHP:"<<totalDelayHP<<endl;
+            double delay = lifetime1.dbl() - totalDelayHP; //aici nu e ok
+            total += delay;
+            if (nrHP == 2) {
+
+                EV << "Average delay for high priority packets: " << (total / nrHP) << endl; //da mereu 0, you get the idea
+            }
+        }
+
+      simtime_t lifetime = simTime() - msg->getCreationTime();
       EV << "Received " << msg->getName() << ", lifetime: " << lifetime << "s" << endl;
       emit(lifetimeSignal, lifetime);
       delete msg;

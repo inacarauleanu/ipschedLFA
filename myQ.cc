@@ -31,6 +31,7 @@ void MyQ::handleMessage(cMessage *msg)
         EV<<"msg->arrivedOn(rxPackets)"<<endl;
         queue.insert(msg);
     } else if (msg->arrivedOn("rxScheduling")){
+
         //read parameters from msg
         delete msg;
         //empty the queue !

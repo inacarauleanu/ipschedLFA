@@ -38,7 +38,9 @@ void Source::handleMessage(cMessage *msg)
     ASSERT(msg == sendMessageEvent);
 
     cMessage *job = new cMessage("job");
+
     send(job, "txPackets");
+
     double sendingTime;
     sendingTime = par("sendIaTime").doubleValue();
     //scheduleAt(simTime()+ exponential(sendingTime));
