@@ -45,7 +45,7 @@ void Scheduler::handleMessage(cMessage *msg)
         //for(int i =0;i<NrUsers;i++){
           //  cMessage *cmd = new cMessage("cmd");
             //send(cmd,"txScheduling",i);
-            cMessage *cmd = new cMessage("mesaj de la schedluer");
+                cMessage *cmd = new cMessage("mesaj de la schedluer");
                 cModule *network = getParentModule();
                 EV<<network<<endl;
 
@@ -73,20 +73,17 @@ void Scheduler::handleMessage(cMessage *msg)
 
                 EV<<"pachete high prio: "<<hp_packs<<endl;
 
-
                 int win = std::max(hp_cont, std::max(mp_cont, lp_cont));
 
+                //WRR
                 if((!hpq->queue.isEmpty()) && (win == hp_cont) )
                 {
 
                     send(cmd, "txScheduling", 0);
                     hp_packs++;
                     network->par("nrHP").setIntValue(hp_packs);
-                    double time = cmd->getCreationTime().dbl();
-                    EV<<"cmd->getCreationTime().dbl()"<<cmd->getCreationTime().dbl()<<endl; //deci aici trb sa iei timpul la care o sa se trimit
-                    network->par("totalDelayHP").setDoubleValue(time);
-                   // nrHP.setLongValue(hp_packs);
 
+                   // nrHP.setLongValue(hp_packs);
 
                 }else if((!mpq->queue.isEmpty()) && (win == mp_cont))
                 {

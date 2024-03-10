@@ -27,11 +27,17 @@ void MyQ::handleMessage(cMessage *msg)
     //int i;
     int ql;
     ql = queue.getLength();
+    cModule *network = getParentModule();
     if (msg->arrivedOn("rxPackets")){
         EV<<"msg->arrivedOn(rxPackets)"<<endl;
+        if (msg->arrivedOn("rxPackets", 0))
+             {
+                double time = msg->getCreationTime().dbl();
+                EV<<"msg->getCreationTime().dbl()"<<time<<endl; //deci aici trb sa iei timpul la care o sa se trimit
+                network->par("totalDelayHP").setDoubleValue(time);
+             }
         queue.insert(msg);
     } else if (msg->arrivedOn("rxScheduling")){
-
         //read parameters from msg
         delete msg;
         //empty the queue !

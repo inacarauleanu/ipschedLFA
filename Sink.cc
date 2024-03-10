@@ -21,6 +21,7 @@ Define_Module(Sink);
 void Sink::initialize()
 {
     lifetimeSignal = registerSignal("lifetime");
+
 }
 
 void Sink::handleMessage(cMessage *msg)
@@ -30,14 +31,15 @@ void Sink::handleMessage(cMessage *msg)
     if (msg->arrivedOn("rxPackets",0)) {
         EV<<"SUNT AICI"<<endl;
         cModule *network = getParentModule();
-        int nrHP = network->par("nrHP");
+            int nrHP = network->par("nrHP");
             EV<<"packs PRIO:"<<nrHP<<endl;
-            double total = 0;
-            double totalDelayHP = network->par("totalDelayHP"); //aici acelasi timp pe care l-am luat din scheduler.
+            double totalDelayHP = network->par("totalDelayHP"); //aici acelasi timp pe care l-am luat din coada
             EV<<"totalDelayHP:"<<totalDelayHP<<endl;
+            EV<<"lifetime:"<<lifetime1.dbl()<<endl;
             double delay = lifetime1.dbl() - totalDelayHP; //aici nu e ok
             total += delay;
-            if (nrHP == 2) {
+            EV<<"total:"<<total<<endl;
+            if (nrHP == 10) {
 
                 EV << "Average delay for high priority packets: " << (total / nrHP) << endl; //da mereu 0, you get the idea
             }

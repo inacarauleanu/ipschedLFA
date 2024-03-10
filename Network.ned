@@ -29,7 +29,7 @@ network Network
         int w_HP;
         int w_MP;
         int w_LP;
-        double totalDelayHP;
+        double totalDelayHP; //timpul la care s-a pus in coada high prio
    submodules:
 scheduler: Scheduler {
     gateSize = 3;

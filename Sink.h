@@ -32,6 +32,7 @@ private:
     virtual void handleMessage(cMessage *msg);
   public:
     simtime_t totalDelayHP;
+    double total = 0;
 };
 
 #endif
