@@ -41,7 +41,15 @@ void Sink::handleMessage(cMessage *msg)
             EV<<"total:"<<total<<endl;
             if (nrHP == 10) {
 
+                double averageDelayHP = total/nrHP;
+                network->par("averageDelayHP").setDoubleValue(averageDelayHP);
+
                 EV << "Average delay for high priority packets: " << (total / nrHP) << endl; //da mereu 0, you get the idea
+
+                cMessage *start_FLC = new cMessage("start_FLC");
+                send(start_FLC, "start_FLC");
+
+                //aici resetam toate pachetele? sau doar cele de high prio
             }
         }
 

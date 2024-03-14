@@ -61,6 +61,9 @@ void Scheduler::handleMessage(cMessage *msg)
                 int mp_weigth = network->par("w_MP");
                 int lp_weigth = network->par("w_LP");
 
+                double totalDelayHP = network->par("totalDelayHP");
+                double averageDelayHP = network->par("averageDelayHP");
+
                 EV<<"HP are lungimea "<<hp_length<<" si weigth-ul "<<hp_weigth<<endl;
                 EV<<"MP are lungimea "<<mp_length<<" si weigth-ul "<<mp_weigth<<endl;
                 EV<<"LP are lungimea "<<lp_length<<" si weigth-ul "<<lp_weigth<<endl;
