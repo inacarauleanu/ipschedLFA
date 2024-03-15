@@ -84,7 +84,7 @@ void Scheduler::handleMessage(cMessage *msg)
 
                     send(cmd, "txScheduling", 0);
                     hp_packs++;
-                    network->par("nrHP").setIntValue(hp_packs);
+                    /*network->par("nrHP").setIntValue(hp_packs);*/
 
                    // nrHP.setLongValue(hp_packs);
 

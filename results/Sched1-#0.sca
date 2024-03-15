@@ -1,14 +1,14 @@
 version 2
-run Sched1-0-20240314-19:56:07-7876
+run Sched1-0-20240315-19:26:25-26656
 attr configname Sched1
-attr datetime 20240314-19:56:07
+attr datetime 20240315-19:26:25
 attr experiment Sched1
 attr inifile omnetpp.ini
 attr iterationvars ""
 attr iterationvarsf ""
 attr measurement ""
 attr network Network
-attr processid 7876
+attr processid 26656
 attr repetition 0
 attr replication #0
 attr resultdir results
@@ -19,7 +19,7 @@ param *.nrMP 2
 param *.nrLP 2
 param Network.sources[*].sendIaTime "20.2 ms"
 
-scalar Network.sink lifetime:mean 1.0159766125874
+scalar Network.sink lifetime:mean 1.0696371898961
 attr interpolationmode none
 attr title "lifetime of arrived jobs, mean"
 attr unit s

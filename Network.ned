@@ -19,7 +19,6 @@ import Sink;
 import Scheduler;
 import MyQ;
 import FLC;
-import GeneratorFLC;
 
 network Network
 
@@ -57,8 +56,7 @@ lpq: MyQ{
 }
 flc: FLC {
 }
-gen: GeneratorFLC {
-}	
+
  
 connections: 
 for i = 0..nrHP - 1 {
@@ -78,7 +76,7 @@ mpq.txPackets --> sink.rxPackets[1];
 lpq.txPackets --> sink.rxPackets[2];
 //scheduler.txScheduling[i] --> user[i].rxScheduling;
 //user[i].txPackets --> sink.rxPackets[i];
-gen.out --> flc.in;
+
 sink.start_FLC --> flc.fromSink;
 
 }     

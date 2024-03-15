@@ -27,33 +27,36 @@ void Sink::initialize()
 void Sink::handleMessage(cMessage *msg)
 {
    // int hp_packs = network->par("nrHP");
-    simtime_t lifetime1 = simTime(); //nu e ok
+    //simtime_t lifetime1 = simTime(); //nu e ok
+    simtime_t lifetime = simTime() - msg->getCreationTime();
     if (msg->arrivedOn("rxPackets",0)) {
+
         EV<<"SUNT AICI"<<endl;
         cModule *network = getParentModule();
-            int nrHP = network->par("nrHP");
-            EV<<"packs PRIO:"<<nrHP<<endl;
-            double totalDelayHP = network->par("totalDelayHP"); //aici acelasi timp pe care l-am luat din coada
-            EV<<"totalDelayHP:"<<totalDelayHP<<endl;
-            EV<<"lifetime:"<<lifetime1.dbl()<<endl;
-            double delay = lifetime1.dbl() - totalDelayHP; //aici nu e ok
+           hp_packs++;
+           EV<<"hp_packs: "<<hp_packs<<endl;
+            double delay = lifetime.dbl();
+            EV<<"delay: "<< delay<<endl;
             total += delay;
             EV<<"total:"<<total<<endl;
-            if (nrHP == 10) {
+            if (hp_packs == 10) {
 
-                double averageDelayHP = total/nrHP;
+                double averageDelayHP = total/hp_packs;
                 network->par("averageDelayHP").setDoubleValue(averageDelayHP);
 
-                EV << "Average delay for high priority packets: " << (total / nrHP) << endl; //da mereu 0, you get the idea
+                EV << "Average delay for high priority packets: " << (total / hp_packs) << endl; //da mereu 0, you get the idea
 
                 cMessage *start_FLC = new cMessage("start_FLC");
                 send(start_FLC, "start_FLC");
+
+                total = 0;
+                hp_packs = 0;
 
                 //aici resetam toate pachetele? sau doar cele de high prio
             }
         }
 
-      simtime_t lifetime = simTime() - msg->getCreationTime();
+      //simtime_t lifetime = simTime() - msg->getCreationTime();
       EV << "Received " << msg->getName() << ", lifetime: " << lifetime << "s" << endl;
       emit(lifetimeSignal, lifetime);
       delete msg;

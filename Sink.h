@@ -33,6 +33,7 @@ private:
   public:
     simtime_t totalDelayHP;
     double total = 0;
+    int hp_packs = 0;
 };
 
 #endif
