@@ -567,8 +567,8 @@ void FLC::handleMessage(cMessage *msg)
 	    EV<<"AM AJUNS IN FLC"<<endl;
 
 	    ev << "Calculez nou HP" << endl;
-	    int wantedDelay = 10;//(int)getParentModule()->par("delayLimit");
-	    int currentDelay = round((double)getParentModule()->par("averageDelayHP"));
+	    int wantedDelay = 1;//(int)getParentModule()->par("delayLimit");
+	    int currentDelay = 10 * round((double)getParentModule()->par("averageDelayHP"));
 	    EV<<"currentDelay: "<<currentDelay<<endl;
 
 	    cModule *network = getParentModule();
@@ -588,9 +588,9 @@ void FLC::handleMessage(cMessage *msg)
 		ev<<" Dif scalat = "<<diff<<"\n";
 			
 		int delta = 0;//(int) getParentModule()->par("delta");
-		int inp[2]={diff,W_HP};
+		int inp[1]={diff};
 		
-		int result = fuzzy_inference(inp,2, delta);
+		int result = fuzzy_inference(inp,1, delta);
 		result_dep.record (result);
 
 		int res = round(scale((B * -1)/2, B/2, 0, 62, result));
@@ -603,6 +603,7 @@ void FLC::handleMessage(cMessage *msg)
 		if (new_W_HP>B) new_W_HP = B-1;
 		if (new_W_HP<1) new_W_HP = 1;
 
+		network->par("w_HP").setIntValue(new_W_HP); //trimitem noul weight
 /* not for test
 		cPar& W_HP_r = getParentModule()->getSubmodule("hp_fifo")->par("weight");
 		W_HP_r.setIntValue(new_W_HP);
@@ -610,6 +611,8 @@ void FLC::handleMessage(cMessage *msg)
 		ev<<"Pondere noua: "<<new_W_HP<<"\n\n";
 		
 		qtimew.record(new_W_HP);
+
+
 		//cMessage *job = new cMessage("clear");
 		//sendDirect(job, getParentModule()->getSubmodule("netwrk")->gate("in"));
 		delete msg;

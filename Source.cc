@@ -41,8 +41,27 @@ void Source::handleMessage(cMessage *msg)
 
     send(job, "txPackets");
 
-    double sendingTime;
+    double sendingTime, netwload,data_generated, PacketLength, transfer_rate, schedulingCycle, nrUsers, nrPackets, nr_of_channels, network_load;
+
     sendingTime = par("sendIaTime").doubleValue();
+        nrUsers = 6;
+       nr_of_channels = 1;
+       nrPackets = 1;
+       PacketLength = 1500 * 8; //din enunt
+       schedulingCycle = 1; //MS
+
+         data_generated = nrUsers* nrPackets *PacketLength / sendingTime;
+         transfer_rate = nr_of_channels/schedulingCycle ;
+         netwload = data_generated/ transfer_rate;
+
+
+        // transfer_rate = nr_of_channels/schedulingCycle ;
+
+
+        // netwload = 0.9;
+
+        sendingTime =  (nrUsers*nrPackets*PacketLength*schedulingCycle)/(netwload*nr_of_channels);
+    //sendingTime = par("sendIaTime").doubleValue();
     //scheduleAt(simTime()+ exponential(sendingTime));
     scheduleAt(simTime()+ exponential(sendingTime), sendMessageEvent);
 
