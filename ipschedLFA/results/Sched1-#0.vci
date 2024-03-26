@@ -1,0 +1,50 @@
+file 16938 1711228161                                           
+version 2
+run Sched1-0-20240323-23:08:50-25644
+attr configname Sched1
+attr datetime 20240323-23:08:50
+attr experiment Sched1
+attr inifile omnetpp.ini
+attr iterationvars ""
+attr iterationvarsf ""
+attr measurement ""
+attr network Network
+attr processid 25644
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 0
+attr seedset 0
+param *.nrHP 2
+param *.nrMP 2
+param *.nrLP 2
+param Network.sources[*].sendIaTime "20.2 ms"
+
+vector 0 Network.sink HP ETV
+vector 1 Network.sink lifetime:vector ETV
+attr interpolationmode none
+attr title "lifetime of arrived jobs, vector"
+attr unit s
+vector 2 Network.sink MP ETV
+vector 3 Network.sink LP ETV
+vector 4 Network.flc "delay vector" ETV
+vector 5 Network.flc "result nescalat" ETV
+vector 6 Network.flc "res scalat" ETV
+vector 7 Network.flc "weight vector" ETV
+0	851 242 16 232 1 94 11 0.021871980136 4 10.468183911456 23.069643599402
+1	1093 773 16 239 1 97 35 0.014175559552 6 39.189689963265 110.03846735043
+2	1866 218 19 229 2 93 10 0.041744619097 5 13.247324226373 35.798631097223
+3	2084 313 22 239 3 97 14 0.014175559552 6 15.474181825436 51.170192653807
+4	2397 13 224 224 92 92 1 10 10 10 100
+5	2410 13 224 224 92 92 1 16 16 16 256
+6	2423 13 224 224 92 92 1 -7 -7 -7 49
+7	2436 12 224 224 92 92 1 1 1 1 1
+0	2448 2117 248 2197 102 991 80 0.058598690267 2.716617497898 65.151102861215 80.342509504756
+1	4565 7014 248 2206 102 996 265 0.001871669755 2.716617497898 182.35850487478 182.68379485682
+2	11579 2060 263 2192 113 990 78 0.028535005794 1.485447590655 46.50720696297 35.032940461258
+3	13639 2837 300 2206 134 996 107 0.001871669755 2.26952913821 70.700195050597 67.308344890803
+4	16476 117 477 2187 218 989 8 10 10 80 800
+5	16593 117 477 2187 218 989 8 16 16 128 2048
+6	16710 117 477 2187 218 989 8 -7 -7 -56 392
+7	16827 109 477 2187 218 989 8 1 1 8 8
+
